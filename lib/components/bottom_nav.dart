@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/components/News.dart';
 import 'package:news_app/components/Search.dart';
+import 'package:news_app/components/favourites.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({Key? key}) : super(key: key);
@@ -50,6 +51,10 @@ class _BottomNavState extends State<BottomNav> {
             );
             break;
           case 2:
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => FavoritesPage()),
+            );
           // Navigate to the favorites screen (you need to create this)
             break;
         }

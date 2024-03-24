@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:news_app/components/Drawer.dart';
 import 'package:news_app/components/NewsItem.dart';
-import 'package:news_app/components/loading.dart';
 import 'bottom_nav.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,7 +27,7 @@ class _NewsState extends State<News> {
 
   @override
   Widget build(BuildContext context) {
-    return loading?Loading(): Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text(
           'News App',
@@ -37,7 +36,10 @@ class _NewsState extends State<News> {
       ),
       drawer: SideNav(),
       body: SingleChildScrollView(
-        child: Column(
+        child: loading?Center(child:Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircularProgressIndicator(),
+        )):Column(
           children: List.generate(curr_news.length, (index) {
             // Access individual article
             var article = curr_news[index];
@@ -65,12 +67,11 @@ class _NewsState extends State<News> {
     var url = 'https://newsdata.io/api/1/news?apikey=pub_404830c2e5114ad94988b445a661038b7b9ee&category=${this.widget.types}&country=in';
     var uri = Uri.parse(url);
     try {
-      final res = await http.get(uri);
-      final body = res.body;
-      final jsonData = jsonDecode(body);
+      final res = await http.get(uri,headers: {'Content-Type': 'application/json; charset=utf-8'});
+      final jsonData = json.decode(utf8.decode(res.bodyBytes)); // Renamed variable to avoid conflict
       setState(() {
         curr_news = jsonData['results'];
-        loading=false;
+        loading = false;
       });
     } catch (e) {
       // Handle the error here
@@ -79,6 +80,7 @@ class _NewsState extends State<News> {
       // You can set curr_news to an empty list or null to indicate that data fetching failed
       setState(() {
         curr_news = []; // Or set curr_news to null
+        loading=false;
       });
     }
   }

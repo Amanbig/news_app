@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'News.dart';
+import 'News.dart'; // Ensure this is correctly imported
 
 class SideNav extends StatelessWidget {
   const SideNav({Key? key}) : super(key: key);
@@ -11,153 +10,85 @@ class SideNav extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          SizedBox(
-            height: 30,
-          ),
-          ListTile(
-            title: Text(
-                'News App',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 21,
+          DrawerHeader(
+            child: Row(
+              children: [
+                Icon(
+                  Icons.monitor_heart,
+                  size: 34,
                 ),
+                SizedBox(
+                  width: 12,
+                ),
+                Text(
+                  'News App',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 34,
+                  ),
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Colors.blue,
             ),
           ),
-          SizedBox(
-            height: 12,
+          _drawerItem(
+            icon: Icons.business,
+            text: 'Business',
+            onTap: () => _navigateTo(context, "business"),
           ),
-          ListTile(
-            title: Text('Business'),
-            onTap: () {
-              // Navigate to Business
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "business",)),
-              );
-            },
+          _drawerItem(
+            icon: Icons.movie,
+            text: 'Entertainment',
+            onTap: () => _navigateTo(context, "entertainment"),
           ),
-          ListTile(
-            title: Text('Entertainment'),
-            onTap: () {
-              // Navigate to Entertainment
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "entertainment",)),
-              );
-            },
+          _drawerItem(
+            icon: Icons.fastfood,
+            text: 'Food',
+            onTap: () => _navigateTo(context, "food"),
           ),
-          ListTile(
-            title: Text('Environment'),
-            onTap: () {
-              // Navigate to General
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "environment",)),
-              );
-            },
+          _drawerItem(
+            icon: Icons.style,
+            text: 'Lifestyle',
+            onTap: () => _navigateTo(context, "lifestyle"),
           ),
-          ListTile(
-            title: Text('Food'),
-            onTap: () {
-              // Navigate to Science
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "food",)),
-              );
-            },
+          _drawerItem(
+            icon: Icons.gavel,
+            text: 'Politics',
+            onTap: () => _navigateTo(context, "politics"),
           ),
-          ListTile(
-            title: Text('Lifestyle'),
-            onTap: () {
-              // Navigate to Science
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "lifestyle",)),
-              );
-            },
+          _drawerItem(
+            icon: Icons.local_hospital,
+            text: 'Health',
+            onTap: () => _navigateTo(context, "health"),
           ),
+          // Add more items here
+          Divider(),
           ListTile(
-            title: Text('Politics'),
+            leading: Icon(Icons.info_outline),
+            title: Text('About'),
             onTap: () {
-              // Navigate to Science
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "politics",)),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Health'),
-            onTap: () {
-              // Navigate to Health
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "health",)),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Science'),
-            onTap: () {
-              // Navigate to Science
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "science",)),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Crime'),
-            onTap: () {
-              // Navigate to Science
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "crime",)),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Domestic'),
-            onTap: () {
-              // Navigate to Science
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "domestic",)),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Education'),
-            onTap: () {
-              // Navigate to Science
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "education",)),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Sports'),
-            onTap: () {
-              // Navigate to Sports
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "sports",)),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Technology'),
-            onTap: () {
-              // Navigate to Technology
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News(types: "technology",)),
-              );
+              // Handle your onTap here
             },
           ),
         ],
       ),
+    );
+  }
+
+  Widget _drawerItem({required IconData icon, required String text, VoidCallback? onTap}) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(text),
+      onTap: onTap,
+    );
+  }
+
+  void _navigateTo(BuildContext context, String types) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => News(types: types)),
     );
   }
 }

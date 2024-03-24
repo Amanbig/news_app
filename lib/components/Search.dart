@@ -22,9 +22,7 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? Loading() // Ensure Loading is properly implemented
-        : Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -51,7 +49,10 @@ class _SearchState extends State<Search> {
                   ),
                 ],
               ),
-              Column(
+              loading?Center(child:Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircularProgressIndicator(),
+              )): Column(
                 children: List.generate(curr_news.length, (index) {
                   var article = curr_news[index];
                   return Padding(
@@ -83,9 +84,8 @@ class _SearchState extends State<Search> {
         'https://newsdata.io/api/1/news?apikey=pub_404830c2e5114ad94988b445a661038b7b9ee&q=$value&country=in';
     var uri = Uri.parse(url);
     try {
-      final res = await http.get(uri);
-      final body = res.body;
-      final jsonData = jsonDecode(body); // Renamed variable to avoid conflict
+      final res = await http.get(uri,headers: {'Content-Type': 'application/json; charset=utf-8'});
+      final jsonData = json.decode(utf8.decode(res.bodyBytes)); // Renamed variable to avoid conflict
       setState(() {
         curr_news = jsonData['results'];
         loading = false;

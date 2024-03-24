@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class NewsItem extends StatefulWidget {
   String? title;
@@ -21,6 +24,11 @@ class NewsItem extends StatefulWidget {
 
 class _NewsItemState extends State<NewsItem> {
   var icon_va = Icons.favorite_outline;
+
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,6 +52,8 @@ class _NewsItemState extends State<NewsItem> {
               '${widget.title}',
               style: TextStyle(
                 fontSize: 32,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -53,6 +63,7 @@ class _NewsItemState extends State<NewsItem> {
               '${widget.description == null ? " " : widget.description}',
               style: TextStyle(
                 fontSize: 22,
+                fontFamily: 'Roboto',
               ),
             ),
           ),

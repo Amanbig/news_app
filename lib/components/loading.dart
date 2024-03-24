@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'News.dart';
+
 class Loading extends StatefulWidget {
   const Loading({super.key});
 
@@ -9,6 +11,16 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+
+  @override
+  void initState() {
+    super.initState();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => News(types: "general",)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
