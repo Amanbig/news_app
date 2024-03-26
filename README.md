@@ -31,7 +31,7 @@ git clone https://github.com/Amanbig/news_app
 2. **Navigate to project directory:**
 
 ```bash
-cd FlutterNewsApp
+cd news_app
 ```
 
 3. **Install dependencies:**
