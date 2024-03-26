@@ -62,7 +62,7 @@ class _SearchState extends State<Search> {
                       author: article['creator'] != null ? article['creator'][0] : '',
                       dateAt: article['pubDate'] != null ? article['pubDate'] : '',
                       description: article['description'] ?? 'No description available',
-                      imageUrl: article['image_url'] ?? '',
+                      imageUrl: article['image_url'] ?? 'https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-For-Desktop-620x349.jpg',
                       newsUrl: article['link'] ?? 'https://example.com',
                     ),
                   );
@@ -72,7 +72,7 @@ class _SearchState extends State<Search> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNav(), // Ensure BottomNav is properly implemented
+      // Ensure BottomNav is properly implemented
     );
   }
 

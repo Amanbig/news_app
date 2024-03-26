@@ -1,64 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/components/News.dart';
-import 'package:news_app/components/Search.dart';
-import 'package:news_app/components/favourites.dart';
 
-class BottomNav extends StatefulWidget {
-  const BottomNav({Key? key}) : super(key: key);
+class BottomNav extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onSelect;
 
-  @override
-  _BottomNavState createState() => _BottomNavState();
-}
-
-class _BottomNavState extends State<BottomNav> {
-  int _currentIndex = 0;
+  const BottomNav({Key? key, required this.currentIndex, required this.onSelect}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      items: const <BottomNavigationBarItem>[
+      currentIndex: currentIndex,
+      selectedItemColor: Colors.blue, // Color for the selected item
+      unselectedItemColor: Colors.grey, // Color for the unselected items
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home_outlined),
+          activeIcon: Icon(Icons.home), // Filled icon when selected
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
+          icon: Icon(Icons.search_outlined),
+          activeIcon: Icon(Icons.search), // Filled icon when selected
           label: 'Search',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite_outline),
+          activeIcon: Icon(Icons.favorite), // Filled icon when selected
           label: 'Favourites',
         ),
       ],
-      onTap: (int index) {
-        setState(() {
-          _currentIndex = index;
-        });
-
-        switch (index) {
-          case 0:
-          // Navigate to the home screen
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => News(types: "general",)),
-            );
-            break;
-          case 1:
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => Search()),
-            );
-            break;
-          case 2:
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => FavoritesPage()),
-            );
-          // Navigate to the favorites screen (you need to create this)
-            break;
-        }
-      },
+      onTap: onSelect, // Use the provided callback to notify the parent
     );
   }
 }

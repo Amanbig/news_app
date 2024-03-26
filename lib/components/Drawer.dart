@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'News.dart'; // Ensure this is correctly imported
+import 'package:news_app/components/about.dart';
+import 'mainscreen.dart'; // Ensure this is correctly imported
 
 class SideNav extends StatelessWidget {
   const SideNav({Key? key}) : super(key: key);
@@ -70,6 +71,10 @@ class SideNav extends StatelessWidget {
             title: Text('About'),
             onTap: () {
               // Handle your onTap here
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => About()),
+              );
             },
           ),
         ],
@@ -88,7 +93,7 @@ class SideNav extends StatelessWidget {
   void _navigateTo(BuildContext context, String types) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => News(types: types)),
+      MaterialPageRoute(builder: (context) => MainScreen(cate: types)),
     );
   }
 }

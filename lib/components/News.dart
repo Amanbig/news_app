@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:news_app/components/Drawer.dart';
 import 'package:news_app/components/NewsItem.dart';
-import 'bottom_nav.dart';
 import 'package:http/http.dart' as http;
+
+import 'Drawer.dart';
 
 class News extends StatefulWidget {
   String? types;
@@ -50,14 +50,13 @@ class _NewsState extends State<News> {
                 author: article['creator'] != null ? article['creator'][0] : '',
                 dateAt: article['pubDate'] != null ? article['pubDate'] : '',
                 description: article['description'] ?? 'No description available',
-                imageUrl: article['image_url'] ?? '',
+                imageUrl: article['image_url'] ?? 'https://www.pixelstalk.net/wp-content/uploads/2016/07/Free-Amazing-Background-Images-For-Desktop-620x349.jpg',
                 newsUrl: article['link'] ?? 'https://example.com',
               ), // Ensure NewsItem is correctly implemented
             );
           }),
         ),
       ),
-      bottomNavigationBar: BottomNav(),
     );
   }
   void fetchData() async {
